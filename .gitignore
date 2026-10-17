@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 venv/
 .venv/
+.idea/
+
+data/raw_postings.jsonl
+data/parsed_postings.jsonl
+data/raw_postings_report.json
