@@ -22,10 +22,13 @@ from collections import Counter
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
+import ssl
+import certifi
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 USER_AGENT = "Mozilla/5.0 (CS152 InternAlign class project)"
+SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 # Title filters
 INTERN = re.compile(r"\b(intern|interns|internship|co-?op)\b", re.I)
@@ -101,7 +104,11 @@ def get_json(url: str, retries: int = 2):
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     for attempt in range(retries + 1):
         try:
-            with urllib.request.urlopen(request, timeout=30) as response:
+            with urllib.request.urlopen(
+                    request,
+                    timeout=30,
+                    context=SSL_CONTEXT
+            ) as response:
                 return json.load(response)
         except Exception:
             if attempt == retries:
