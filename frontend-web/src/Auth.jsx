@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, LockKeyhole, Mail, UserRound } from "lucide-react";
-
-const API_URL = "http://127.0.0.1:8000";
+import { api } from "./api";
 
 function Auth({ onLogin }) {
   const [mode, setMode] = useState("login");
@@ -28,46 +27,22 @@ function Auth({ onLogin }) {
     setError("");
     setLoading(true);
 
-    const endpoint = mode === "login" ? "/login" : "/signup";
-
-    const requestBody =
-      mode === "login"
-        ? {
-            email: form.email,
-            password: form.password,
-          }
-        : {
-            name: form.name,
-            email: form.email,
-            password: form.password,
-          };
-
     try {
-      const response = await fetch(`${API_URL}${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.detail || "Something went wrong.");
-      }
-
       if (mode === "signup") {
-        setMessage("Account created successfully. Please log in.");
-        setMode("login");
-        setForm({
-          name: "",
-          email: form.email,
-          password: "",
+        await api("/signup", {
+          method: "POST",
+          auth: false,
+          json: { name: form.name, email: form.email, password: form.password },
         });
-      } else {
-        onLogin(data);
       }
+
+      // After signing up we log straight in instead of asking the user to type it all again.
+      const data = await api("/login", {
+        method: "POST",
+        auth: false,
+        json: { email: form.email, password: form.password },
+      });
+      onLogin(data);
     } catch (err) {
       setError(err.message);
     } finally {

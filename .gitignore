@@ -14,3 +14,8 @@ node_modules/
 frontend-web/node_modules/
 internalign.db
 .env
+uploads/
+.pytest_cache/
+frontend-web/dist/
+data/gap_analysis.json
+.DS_Store

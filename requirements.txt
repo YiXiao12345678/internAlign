@@ -1,10 +1,24 @@
-annotated-types==0.8.0
-lxml==6.1.3
+# Web API
+fastapi==0.143.3
+starlette==1.7.0
+uvicorn==0.54.0
+python-multipart==0.0.32
 pydantic==2.14.1
 pydantic_core==2.50.1
-pypdf==6.20.1
-python-docx==1.2.0
-python-dotenv==1.2.4
+annotated-types==0.8.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
+
+# Accounts / database
+sqlalchemy==2.0.55
+python-jose==3.5.0
+bcrypt==5.0.0
+python-dotenv==1.2.4
+
+# Resume parsing
+pypdf==6.20.1
+python-docx==1.2.0
+lxml==6.1.3
+
+# Posting collection (fetch_postings.py)
 certifi
