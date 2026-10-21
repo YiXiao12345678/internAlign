@@ -19,3 +19,4 @@ uploads/
 frontend-web/dist/
 data/gap_analysis.json
 .DS_Store
+data/faiss_index/

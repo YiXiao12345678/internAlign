@@ -1,0 +1,13 @@
+# RAG workflow (ai-workflow/). Install on top of the main requirements:
+#   pip install -r requirements.txt -r ai-workflow/requirements.txt
+# sentence-transformers pulls in PyTorch, so the first install is large.
+langchain-core==1.6.12
+langchain-text-splitters==1.1.3
+langchain-community==0.4.2
+langchain-huggingface==1.2.3
+langchain-openai==1.7.2
+faiss-cpu==1.15.1
+sentence-transformers==6.1.0
+
+# Only if you switch RAG_LLM_PROVIDER to ollama (not tested):
+# langchain-ollama

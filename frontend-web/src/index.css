@@ -1216,3 +1216,32 @@ button {
   outline: 2px solid #7659d8;
   outline-offset: 2px;
 }
+
+/* Analysis method switch (rule-based vs. RAG) */
+.engine-toggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e1f6;
+  border-radius: 10px;
+  background: #faf9ff;
+}
+.engine-toggle button {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #5b5675;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.engine-toggle button.active {
+  background: #7659d8;
+  color: #fff;
+}
+.engine-note {
+  font-size: 0.8rem;
+  color: #6f6a88;
+}

@@ -56,6 +56,8 @@ export default function Dashboard({ user, onLogout }) {
   const [analysis, setAnalysis] = useState(null);
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [analysisError, setAnalysisError] = useState("");
+  // "rules" = keyword matching, "rag" = retrieval + language model (ai-workflow/)
+  const [engine, setEngine] = useState("rules");
 
   const [search, setSearch] = useState("");
   const [band, setBand] = useState("all");
@@ -92,7 +94,8 @@ export default function Dashboard({ user, onLogout }) {
       setAnalysisLoading(true);
       setAnalysisError("");
       try {
-        const result = await api(`/analysis/${encodeURIComponent(selectedId)}`);
+        const base = engine === "rag" ? "/rag/analysis" : "/analysis";
+        const result = await api(`${base}/${encodeURIComponent(selectedId)}`);
         if (!cancelled) setAnalysis(result);
       } catch (err) {
         if (!cancelled) {
@@ -107,7 +110,7 @@ export default function Dashboard({ user, onLogout }) {
     return () => {
       cancelled = true;
     };
-  }, [selectedId, resume?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedId, resume?.id, engine]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function uploadFile(file) {
     if (!file) return;
@@ -176,7 +179,13 @@ export default function Dashboard({ user, onLogout }) {
 
   const analysisSection = resume && selectedId && (
     <section className="content-section analysis-section" ref={analysisRef}>
-      <AnalysisPanel analysis={analysis} loading={analysisLoading} error={analysisError} />
+      <AnalysisPanel
+        analysis={analysis}
+        loading={analysisLoading}
+        error={analysisError}
+        engine={engine}
+        onEngineChange={setEngine}
+      />
     </section>
   );
 

@@ -17,6 +17,7 @@ GET  /analysis/{posting_id}             gap analysis for one posting
 from __future__ import annotations
 
 import re
+import sys
 import uuid
 
 from fastapi import Depends, FastAPI, File, HTTPException, Query, UploadFile
@@ -191,3 +192,20 @@ def analysis(posting_id: str, user: User = Depends(get_current_user), db: Sessio
     if not posting:
         raise HTTPException(status_code=404, detail="Posting not found")
     return analyze_posting(posting, resume.text)
+
+
+# --------------------------------------------------------------------------
+# RAG workflow (ai-workflow/): /rag/status, /rag/matches, /rag/analysis/{posting_id}
+# Optional: the rest of the API keeps working if the folder or its packages are missing.
+# --------------------------------------------------------------------------
+def _rag_resume_text(user: User, db: Session) -> str:
+    return _require_resume(db, user).text
+
+
+try:
+    sys.path.insert(0, str(config.PROJECT_ROOT / "ai-workflow"))
+    from internalign_rag.router import build_router
+
+    app.include_router(build_router(get_current_user, get_db, _rag_resume_text))
+except ImportError as error:
+    print(f"RAG routes not loaded: {error}")

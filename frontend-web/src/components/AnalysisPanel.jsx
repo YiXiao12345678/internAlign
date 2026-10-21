@@ -32,11 +32,42 @@ function RequirementRow({ req }) {
   );
 }
 
-export default function AnalysisPanel({ analysis, loading, error }) {
-  const [showAllQuestions, setShowAllQuestions] = useState(false);
+function EngineToggle({ engine, onChange }) {
+  if (!onChange) return null;
+  return (
+    <div className="engine-toggle" role="group" aria-label="Analysis method">
+      <button type="button" className={engine === "rules" ? "active" : ""} onClick={() => onChange("rules")}>
+        Rule-based
+      </button>
+      <button type="button" className={engine === "rag" ? "active" : ""} onClick={() => onChange("rag")}>
+        AI (RAG)
+      </button>
+    </div>
+  );
+}
 
-  if (loading) return <div className="panel-state">Analyzing this posting…</div>;
-  if (error) return <div className="banner banner-error">{error}</div>;
+export default function AnalysisPanel({ analysis, loading, error, engine = "rules", onEngineChange }) {
+  const [showAllQuestions, setShowAllQuestions] = useState(false);
+  const toggle = <EngineToggle engine={engine} onChange={onEngineChange} />;
+
+  if (loading) {
+    return (
+      <>
+        {toggle}
+        <div className="panel-state">
+          {engine === "rag" ? "Retrieving the posting and asking the language model… this can take a little while." : "Analyzing this posting…"}
+        </div>
+      </>
+    );
+  }
+  if (error) {
+    return (
+      <>
+        {toggle}
+        <div className="banner banner-error">{error}</div>
+      </>
+    );
+  }
   if (!analysis) return <div className="panel-state">Choose a job to see how your resume lines up.</div>;
 
   const { score, requirements, summary, clarification_questions: questions } = analysis;
@@ -46,6 +77,7 @@ export default function AnalysisPanel({ analysis, loading, error }) {
 
   return (
     <>
+      {toggle}
       <div className="section-heading">
         <div>
           <span className="section-kicker">ANALYSIS</span>
@@ -72,6 +104,13 @@ export default function AnalysisPanel({ analysis, loading, error }) {
             </div>
           </div>
           <h3>{analysis.score_label}</h3>
+          {analysis.engine === "rag" && (
+            <p className="engine-note">
+              AI analysis by {analysis.model}.
+              {analysis.unverified_quotes_removed > 0 &&
+                ` ${analysis.unverified_quotes_removed} quote(s) not found in your resume were discarded.`}
+            </p>
+          )}
           {analysis.note ? (
             <p>{analysis.note}</p>
           ) : (
