@@ -118,12 +118,6 @@ def _words(text: str) -> list[str]:
 
 
 def is_in_posting(requirement: str, posting_text: str) -> bool:
-    """
-    True if the posting really mentions this requirement. Every meaningful word
-    of the requirement must appear in the posting. Words of five or more letters
-    match by their first five letters (collaboration ~ collaborative); shorter
-    words, such as sql or git, must match exactly.
-    """
     posting_words = _words(posting_text)
     exact = set(posting_words)
     wanted = 0

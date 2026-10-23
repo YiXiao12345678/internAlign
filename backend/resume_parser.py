@@ -32,6 +32,21 @@ def clean_text(text: str) -> str:
     return text.strip()
 
 
+def _page_text(page) -> str:
+    """Text of one PDF page, one visual line per line.
+
+    pypdf's default mode returns justified or kerned lines as one word per line, which
+    broke section detection and made evidence quotes useless. Layout mode keeps each
+    line and heading intact; fall back to the default mode if layout mode is missing
+    (older pypdf) or returns nothing.
+    """
+    try:
+        text = page.extract_text(extraction_mode="layout") or ""
+    except Exception:
+        text = ""
+    return text if text.strip() else (page.extract_text() or "")
+
+
 def _pdf_text(stream: io.BytesIO) -> str:
     try:
         reader = PdfReader(stream)
@@ -39,7 +54,7 @@ def _pdf_text(stream: io.BytesIO) -> str:
             raise ResumeParseError(
                 "This PDF is password-protected. Remove the password and upload it again."
             )
-        return "\n\n".join((page.extract_text() or "") for page in reader.pages)
+        return "\n\n".join(_page_text(page) for page in reader.pages)
     except ResumeParseError:
         raise
     except Exception as error:  # pypdf raises many different exception types

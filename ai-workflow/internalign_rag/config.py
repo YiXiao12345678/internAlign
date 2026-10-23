@@ -1,4 +1,4 @@
-"""RAG settings, read from environment variables (or the .env file in the project root)."""
+"""RAG settings, read from environment variables."""
 import os
 from pathlib import Path
 
@@ -11,14 +11,13 @@ load_dotenv(PROJECT_ROOT / ".env")
 POSTINGS_PATH = Path(os.getenv("RAG_POSTINGS_PATH", PROJECT_ROOT / "data" / "raw_postings.jsonl"))
 VECTOR_DB_PATH = Path(os.getenv("RAG_VECTOR_DB_PATH", PROJECT_ROOT / "data" / "faiss_index"))
 
-# Embeddings run locally and are free. Alternative: BAAI/bge-small-en-v1.5
+# Embeddings run locally and are free
 EMBEDDING_MODEL = os.getenv("RAG_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 CHUNK_SIZE = int(os.getenv("RAG_CHUNK_SIZE", "800"))
 CHUNK_OVERLAP = int(os.getenv("RAG_CHUNK_OVERLAP", "100"))
 TOP_K = int(os.getenv("RAG_TOP_K", "5"))
 
-# Generation model. "openai" (GPT-4o-mini, default), "huggingface" (open-source, hosted)
-# or "ollama" (open-source, local). Switching providers needs no code change, only these variables.
+# Generation model
 LLM_PROVIDER = os.getenv("RAG_LLM_PROVIDER", "openai").lower()
 HF_MODEL = os.getenv("RAG_HF_MODEL", "Qwen/Qwen2.5-7B-Instruct")
 OLLAMA_MODEL = os.getenv("RAG_OLLAMA_MODEL", "qwen2.5:7b-instruct")

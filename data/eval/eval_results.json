@@ -1,0 +1,577 @@
+{
+  "generated_at": "2026-10-23T10:05:50.822309+00:00",
+  "settings": {
+    "n_per_family": 15,
+    "seed": 152,
+    "skip_rag": false
+  },
+  "corpus": {
+    "postings": 322,
+    "families": {
+      "SE": 221,
+      "AIML": 67,
+      "hybrid": 10,
+      "other": 24
+    }
+  },
+  "resumes": {
+    "SE": {
+      "path": "data/resume/yuji_n_resume_SE.pdf",
+      "chars": 3784,
+      "one_word_line_ratio": 0.04081632653061224
+    },
+    "AIML": {
+      "path": "data/resume/yuji_n_resume.pdf",
+      "chars": 4202,
+      "one_word_line_ratio": 0.0196078431372549
+    }
+  },
+  "baseline": {
+    "mean_score": {
+      "SE": {
+        "SE": {
+          "n": 216,
+          "mean": 54.44444444444444,
+          "median": 56.5,
+          "p95": 84,
+          "min": 0,
+          "max": 100
+        },
+        "AIML": {
+          "n": 67,
+          "mean": 64.68656716417911,
+          "median": 65,
+          "p95": 88,
+          "min": 0,
+          "max": 100
+        }
+      },
+      "AIML": {
+        "SE": {
+          "n": 216,
+          "mean": 65.4074074074074,
+          "median": 67.0,
+          "p95": 100,
+          "min": 0,
+          "max": 100
+        },
+        "AIML": {
+          "n": 67,
+          "mean": 88.53731343283582,
+          "median": 91,
+          "p95": 100,
+          "min": 50,
+          "max": 100
+        }
+      }
+    },
+    "discrimination": {
+      "SE_postings": {
+        "n": 216,
+        "mean_a": 54.44444444444444,
+        "mean_b": 65.4074074074074,
+        "mean_diff": -10.962962962962964,
+        "ci95": [
+          -14.23611111111111,
+          -7.75
+        ],
+        "win_rate_a": 0.3402777777777778,
+        "wins": 62,
+        "losses": 131,
+        "ties": 23,
+        "sign_test_p": 7.591204866484828e-07,
+        "cohens_dz": -0.44154419471221384,
+        "expected": "SE resume scores higher than AI/ML resume"
+      },
+      "AIML_postings": {
+        "n": 67,
+        "mean_a": 88.53731343283582,
+        "mean_b": 64.68656716417911,
+        "mean_diff": 23.850746268656717,
+        "ci95": [
+          19.791044776119403,
+          28.238805970149254
+        ],
+        "win_rate_a": 0.9328358208955224,
+        "wins": 60,
+        "losses": 2,
+        "ties": 5,
+        "sign_test_p": 8.474124180146703e-16,
+        "cohens_dz": 1.384295890470555,
+        "expected": "AI/ML resume scores higher than SE resume"
+      }
+    },
+    "retrieval": {
+      "SE": {
+        "precision@5": 0.6,
+        "precision@10": 0.6,
+        "ndcg@10": 0.4932162989129126,
+        "mrr": 0.3333333333333333,
+        "random_baseline@5": 0.717391304347826,
+        "lift@5": 0.8363636363636364
+      },
+      "AIML": {
+        "precision@5": 0.2,
+        "precision@10": 0.4,
+        "ndcg@10": 0.30120429660463977,
+        "mrr": 0.25,
+        "random_baseline@5": 0.2391304347826087,
+        "lift@5": 0.8363636363636364
+      }
+    }
+  },
+  "rag": {
+    "model": "gpt-4o-mini-2024-07-18",
+    "sample": {
+      "SE": 15,
+      "AIML": 15
+    },
+    "mean_score": {
+      "SE": {
+        "SE": {
+          "n": 15,
+          "mean": 53.06666666666667,
+          "median": 47,
+          "p95": 100,
+          "min": 0,
+          "max": 100
+        },
+        "AIML": {
+          "n": 15,
+          "mean": 44.666666666666664,
+          "median": 46,
+          "p95": 71,
+          "min": 0,
+          "max": 71
+        }
+      },
+      "AIML": {
+        "SE": {
+          "n": 15,
+          "mean": 48.46666666666667,
+          "median": 50,
+          "p95": 80,
+          "min": 0,
+          "max": 80
+        },
+        "AIML": {
+          "n": 15,
+          "mean": 51.13333333333333,
+          "median": 54,
+          "p95": 83,
+          "min": 11,
+          "max": 83
+        }
+      }
+    },
+    "discrimination": {
+      "SE_postings": {
+        "n": 15,
+        "mean_a": 53.06666666666667,
+        "mean_b": 48.46666666666667,
+        "mean_diff": 4.6,
+        "ci95": [
+          -6.666666666666667,
+          16.933333333333334
+        ],
+        "win_rate_a": 0.6,
+        "wins": 8,
+        "losses": 5,
+        "ties": 2,
+        "sign_test_p": 0.5810546875,
+        "cohens_dz": 0.18436276140761432,
+        "expected": "SE resume scores higher than AI/ML resume"
+      },
+      "AIML_postings": {
+        "n": 15,
+        "mean_a": 51.13333333333333,
+        "mean_b": 44.666666666666664,
+        "mean_diff": 6.466666666666667,
+        "ci95": [
+          -0.7333333333333333,
+          13.6
+        ],
+        "win_rate_a": 0.6333333333333333,
+        "wins": 8,
+        "losses": 4,
+        "ties": 3,
+        "sign_test_p": 0.3876953125,
+        "cohens_dz": 0.44104254339189,
+        "expected": "AI/ML resume scores higher than SE resume"
+      }
+    },
+    "baseline_on_same_sample": {
+      "SE_postings": {
+        "n": 14,
+        "mean_a": 58.785714285714285,
+        "mean_b": 70.14285714285714,
+        "mean_diff": -11.357142857142858,
+        "ci95": [
+          -19.928571428571427,
+          -2.7857142857142856
+        ],
+        "win_rate_a": 0.25,
+        "wins": 3,
+        "losses": 10,
+        "ties": 1,
+        "sign_test_p": 0.09228515625,
+        "cohens_dz": -0.6734470480175376,
+        "expected": "SE resume scores higher than AI/ML resume"
+      },
+      "AIML_postings": {
+        "n": 15,
+        "mean_a": 85.06666666666666,
+        "mean_b": 62.333333333333336,
+        "mean_diff": 22.733333333333334,
+        "ci95": [
+          15.733333333333333,
+          30.066666666666666
+        ],
+        "win_rate_a": 0.9333333333333333,
+        "wins": 14,
+        "losses": 1,
+        "ties": 0,
+        "sign_test_p": 0.0009765625,
+        "cohens_dz": 1.559511274509453,
+        "expected": "AI/ML resume scores higher than SE resume"
+      }
+    },
+    "faithfulness": {
+      "SE": {
+        "analyses": 30,
+        "quotes_before_guard": 215,
+        "quote_support_rate": {
+          "k": 201,
+          "n": 215,
+          "rate": 0.9348837209302325,
+          "ci95": [
+            0.8936801249655801,
+            0.9608192024017941
+          ]
+        },
+        "requirements_before_guard": 301,
+        "requirement_grounding_rate": {
+          "k": 291,
+          "n": 301,
+          "rate": 0.9667774086378738,
+          "ci95": [
+            0.9399341409578506,
+            0.9818560609043625
+          ]
+        },
+        "unsupported_evidence_shown": 0,
+        "supported_without_evidence": 0
+      },
+      "AIML": {
+        "analyses": 30,
+        "quotes_before_guard": 212,
+        "quote_support_rate": {
+          "k": 202,
+          "n": 212,
+          "rate": 0.9528301886792453,
+          "ci95": [
+            0.9153615057300581,
+            0.9741797133861827
+          ]
+        },
+        "requirements_before_guard": 319,
+        "requirement_grounding_rate": {
+          "k": 309,
+          "n": 319,
+          "rate": 0.9686520376175548,
+          "ci95": [
+            0.9432656592935904,
+            0.9828851217705599
+          ]
+        },
+        "unsupported_evidence_shown": 0,
+        "supported_without_evidence": 0
+      }
+    },
+    "oracle_check": {
+      "AIML": {
+        "requirements_checked": 107,
+        "present": 84,
+        "absent": 14,
+        "related": 9,
+        "supported_recall_on_present": {
+          "k": 68,
+          "n": 84,
+          "rate": 0.8095238095238095,
+          "ci95": [
+            0.7127605972340397,
+            0.8792140480365381
+          ]
+        },
+        "unsupported_claim_rate_on_absent": {
+          "k": 2,
+          "n": 14,
+          "rate": 0.14285714285714285,
+          "ci95": [
+            0.040093073737921175,
+            0.39941907763863693
+          ]
+        },
+        "partial_claim_rate_on_absent": {
+          "k": 0,
+          "n": 14,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.21531701192718142
+          ]
+        },
+        "supported_precision": {
+          "k": 68,
+          "n": 70,
+          "rate": 0.9714285714285714,
+          "ci95": [
+            0.9016755648760818,
+            0.9921295531061937
+          ]
+        },
+        "related_status_mix": {
+          "Not found": 7,
+          "Supported": 2
+        },
+        "disputed": [
+          {
+            "posting_id": "ashby:snowflake:ab028e3c-c1cf-4455-8915-8e4e6b0cc9e8",
+            "requirement": "Coursework or familiarity with database systems, distributed systems, cloud computing, or compilers.",
+            "evidence": "Intro to Database Management Systems"
+          },
+          {
+            "posting_id": "ashby:revel:34f97b81-c981-4c4b-9f4d-d471c33b46cc",
+            "requirement": "Strong problem-solving and debugging skills",
+            "evidence": "Achieved wind forecasting error (RMSE) of ~6-13% | Achieved 83% work-state timeline alignment against human expert-annotated ground truth"
+          }
+        ]
+      },
+      "SE": {
+        "requirements_checked": 101,
+        "present": 54,
+        "absent": 27,
+        "related": 20,
+        "supported_recall_on_present": {
+          "k": 53,
+          "n": 54,
+          "rate": 0.9814814814814815,
+          "ci95": [
+            0.902283346415128,
+            0.996723596684648
+          ]
+        },
+        "unsupported_claim_rate_on_absent": {
+          "k": 1,
+          "n": 27,
+          "rate": 0.037037037037037035,
+          "ci95": [
+            0.006567976533097597,
+            0.1828385393415652
+          ]
+        },
+        "partial_claim_rate_on_absent": {
+          "k": 1,
+          "n": 27,
+          "rate": 0.037037037037037035,
+          "ci95": [
+            0.006567976533097597,
+            0.1828385393415652
+          ]
+        },
+        "supported_precision": {
+          "k": 53,
+          "n": 54,
+          "rate": 0.9814814814814815,
+          "ci95": [
+            0.902283346415128,
+            0.996723596684648
+          ]
+        },
+        "related_status_mix": {
+          "Not found": 9,
+          "Supported": 9,
+          "Partially supported": 2
+        },
+        "disputed": [
+          {
+            "posting_id": "greenhouse:aperaaiinc:5239440007",
+            "requirement": "Experience working in Linux or Docker-based environments",
+            "evidence": "Deployed a Convolutional Neural Network (CNN) model using Docker and GKE | Containerized the MLOps pipeline by using Streamlit, authorizing multi-stage Dockerfiles"
+          }
+        ]
+      }
+    },
+    "agreement_with_baseline": {
+      "kappa": 0.5436678135457416,
+      "agreement": 0.7718446601941747,
+      "n": 206,
+      "confusion_rows_rag_cols_baseline": {
+        "Supported": {
+          "Supported": 120,
+          "Partially supported": 11,
+          "Not found": 3
+        },
+        "Partially supported": {
+          "Supported": 4,
+          "Partially supported": 2,
+          "Not found": 1
+        },
+        "Not found": {
+          "Supported": 13,
+          "Partially supported": 15,
+          "Not found": 37
+        }
+      }
+    },
+    "status_mix": {
+      "AIML_resume_on_SE_postings": {
+        "required_requirements": 78,
+        "Supported": 0.6025641025641025,
+        "Partially supported": 0.01282051282051282,
+        "Not found": 0.38461538461538464
+      },
+      "AIML_resume_on_AIML_postings": {
+        "required_requirements": 66,
+        "Supported": 0.5303030303030303,
+        "Partially supported": 0.09090909090909091,
+        "Not found": 0.3787878787878788
+      },
+      "SE_resume_on_SE_postings": {
+        "required_requirements": 69,
+        "Supported": 0.4927536231884058,
+        "Partially supported": 0.028985507246376812,
+        "Not found": 0.4782608695652174
+      },
+      "SE_resume_on_AIML_postings": {
+        "required_requirements": 55,
+        "Supported": 0.5636363636363636,
+        "Partially supported": 0.09090909090909091,
+        "Not found": 0.34545454545454546
+      }
+    },
+    "retrieval": {
+      "SE": {
+        "precision@5": 0.4,
+        "precision@10": 0.6,
+        "ndcg@10": 0.6149518506608846,
+        "mrr": 1.0,
+        "random_baseline@5": 0.717391304347826,
+        "lift@5": 0.5575757575757576,
+        "top5": [
+          {
+            "posting_id": "greenhouse:applovin:4714443006",
+            "title": "Full Stack Engineering Intern (2027 Summer Internship)",
+            "company": "AppLovin",
+            "family": "SE"
+          },
+          {
+            "posting_id": "greenhouse:genevatrading:5242180007",
+            "title": "PMO Data Engineering Intern",
+            "company": "genevatrading",
+            "family": "other"
+          },
+          {
+            "posting_id": "ashby:snowflake:41e65c6c-a01e-4f40-af14-ae75d3b95e27",
+            "title": "Software Engineer Intern - Berlin (2026)",
+            "company": "Snowflake",
+            "family": "SE"
+          },
+          {
+            "posting_id": "greenhouse:perpay:4076978007",
+            "title": "Data Science Internship, Summer 2027",
+            "company": "perpay",
+            "family": "AIML"
+          },
+          {
+            "posting_id": "greenhouse:metoxinternationalinc:5427064008",
+            "title": "Data Science Co-Op/Intern (Spring/Summer 2027)",
+            "company": "metoxinternationalinc",
+            "family": "AIML"
+          }
+        ]
+      },
+      "AIML": {
+        "precision@5": 0.6,
+        "precision@10": 0.7,
+        "ndcg@10": 0.7538142945344392,
+        "mrr": 1.0,
+        "random_baseline@5": 0.2391304347826087,
+        "lift@5": 2.509090909090909,
+        "top5": [
+          {
+            "posting_id": "ashby:cyvl:8bfc4116-b0bb-47f8-bca1-7069a37db328",
+            "title": "Software Engineering Intern - SWE/ML (Summer 2027)",
+            "company": "cyvl",
+            "family": "hybrid"
+          },
+          {
+            "posting_id": "greenhouse:metoxinternationalinc:5427064008",
+            "title": "Data Science Co-Op/Intern (Spring/Summer 2027)",
+            "company": "metoxinternationalinc",
+            "family": "AIML"
+          },
+          {
+            "posting_id": "greenhouse:veeamsoftware:4971207101",
+            "title": "AI/ML Intern Summer 2027",
+            "company": "veeamsoftware",
+            "family": "AIML"
+          },
+          {
+            "posting_id": "greenhouse:generalmatter:5377118008",
+            "title": "Summer 2027 Internship - Software Engineering",
+            "company": "generalmatter",
+            "family": "SE"
+          },
+          {
+            "posting_id": "greenhouse:dvtrading:4733138005",
+            "title": "Software Developer Intern - Summer 2027 (DV Equities)",
+            "company": "dvtrading",
+            "family": "SE"
+          }
+        ]
+      }
+    },
+    "efficiency": {
+      "calls": 60,
+      "failed": 0,
+      "latency_s": {
+        "n": 60,
+        "mean": 7.082926607659707,
+        "median": 7.098316458519548,
+        "p95": 9.247766833752394,
+        "min": 1.7853813753463328,
+        "max": 25.27944716718048
+      },
+      "estimated_input_tokens": {
+        "n": 60,
+        "mean": 2905.75,
+        "median": 2921.0,
+        "p95": 3250.5,
+        "min": 2246.0,
+        "max": 3250.5
+      },
+      "estimated_output_tokens": {
+        "n": 60,
+        "mean": 1274.5708333333334,
+        "median": 1304.75,
+        "p95": 1676.25,
+        "min": 118.75,
+        "max": 1781.25
+      },
+      "estimated_cost_usd_per_analysis": {
+        "n": 60,
+        "mean": 0.001200605,
+        "median": 0.0012013125000000001,
+        "p95": 0.0014439000000000001,
+        "min": 0.00054315,
+        "max": 0.0015406500000000002
+      },
+      "price_assumption_usd_per_million_tokens": {
+        "input": 0.15,
+        "output": 0.6,
+        "note": "estimate from character counts; verify price and usage"
+      }
+    }
+  }
+}
